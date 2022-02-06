@@ -8,32 +8,32 @@
 /*
     Copyright (c) 2019, GigaDevice Semiconductor Inc.
 
-    Redistribution and use in source and binary forms, with or without modification, 
+    Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
 
-    1. Redistributions of source code must retain the above copyright notice, this 
+    1. Redistributions of source code must retain the above copyright notice, this
        list of conditions and the following disclaimer.
-    2. Redistributions in binary form must reproduce the above copyright notice, 
-       this list of conditions and the following disclaimer in the documentation 
+    2. Redistributions in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimer in the documentation
        and/or other materials provided with the distribution.
-    3. Neither the name of the copyright holder nor the names of its contributors 
-       may be used to endorse or promote products derived from this software without 
+    3. Neither the name of the copyright holder nor the names of its contributors
+       may be used to endorse or promote products derived from this software without
        specific prior written permission.
 
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
-IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
-INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
-NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
-PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
-WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
 OF SUCH DAMAGE.
 */
 
-#include "../Include/drv_usb_hw.h"
-#include "../Include/usbh_transc.h"
+#include "../include/drv_usb_hw.h"
+#include "../include/usbh_transc.h"
 
 /*!
     \brief      prepare a pipe and start a transfer
@@ -42,7 +42,7 @@ OF SUCH DAMAGE.
     \param[out] none
     \retval     operation status
 */
-static uint32_t usbh_request_submit (usb_core_driver *pudev, uint8_t pp_num) 
+static uint32_t usbh_request_submit (usb_core_driver *pudev, uint8_t pp_num)
 {
     pudev->host.pipe[pp_num].urb_state = URB_IDLE;
     pudev->host.pipe[pp_num].xfer_count = 0U;
@@ -209,8 +209,8 @@ static void usbh_setup_transc (usb_core_driver *pudev, usbh_host *puhost)
     usb_urb_state urb_status = URB_IDLE;
 
     /* send a SETUP packet */
-    usbh_ctlsetup_send (pudev, 
-                        puhost->control.setup.data, 
+    usbh_ctlsetup_send (pudev,
+                        puhost->control.setup.data,
                         puhost->control.pipe_out_num);
 
     urb_status = usbh_urb_wait (pudev, puhost, puhost->control.pipe_out_num, 0U);
@@ -273,7 +273,7 @@ static void usbh_data_out_transc (usb_core_driver *pudev, usbh_host *puhost)
 {
     usb_urb_state urb_status = URB_IDLE;
 
-    pudev->host.pipe[puhost->control.pipe_out_num].data_toggle_out = 1U; 
+    pudev->host.pipe[puhost->control.pipe_out_num].data_toggle_out = 1U;
 
     usbh_data_send (pudev,
                     puhost->control.buf,
@@ -388,4 +388,3 @@ usbh_status usbh_ctl_handler (usb_core_driver *pudev, usbh_host *puhost)
 
     return status;
 }
-

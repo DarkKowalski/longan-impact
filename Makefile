@@ -71,6 +71,7 @@ ARCH = -march=rv32imac -mabi=ilp32 -mcmodel=medlow
 C_DEFS =  \
 -DUSE_STDPERIPH_DRIVER \
 -DHXTAL_VALUE=$(SYSTEM_CLOCK) \
+-DDEBUG_USART_BAUDRATE=57600U \
 
 # AS includes
 AS_INCLUDES =

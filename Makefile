@@ -28,14 +28,16 @@ SYSTEM_CLOCK := 8000000U
 C_SOURCES =  \
 $(wildcard $(FIRMWARE_DIR)/standard_peripheral/src/*.c) \
 $(wildcard $(FIRMWARE_DIR)/standard_peripheral/*.c) \
-$(wildcard $(FIRMWARE_DIR)/riscv/stubs/*.c) \
-$(wildcard $(FIRMWARE_DIR)/riscv/drivers/*.c) \
+$(wildcard $(FIRMWARE_DIR)/nuclei/stubs/*.c) \
+$(wildcard $(FIRMWARE_DIR)/nuclei/drivers/*.c) \
+$(FIRMWARE_DIR)/gd32vf103c_longan_nano.c \
 $(wildcard src/*.c) \
+# $(wildcard $(FIRMWARE_DIR)/usbfs_driver/src/*.c) \
 
 # ASM sources
 ASM_SOURCES =  \
-$(FIRMWARE_DIR)/riscv/init/start.S \
-$(FIRMWARE_DIR)/riscv/init/entry.S
+$(FIRMWARE_DIR)/nuclei/init/start.S \
+$(FIRMWARE_DIR)/nuclei/init/entry.S
 
 ######################################
 # firmware library
@@ -72,6 +74,7 @@ C_DEFS =  \
 -DUSE_STDPERIPH_DRIVER \
 -DHXTAL_VALUE=$(SYSTEM_CLOCK) \
 -DDEBUG_USART_BAUDRATE=57600U \
+#-DUSE_USB_FS \
 
 # AS includes
 AS_INCLUDES =
@@ -81,7 +84,9 @@ C_INCLUDES =  \
 -I./include \
 -I$(FIRMWARE_DIR)/standard_peripheral/include \
 -I$(FIRMWARE_DIR)/standard_peripheral \
--I$(FIRMWARE_DIR)/riscv/drivers
+-I$(FIRMWARE_DIR)/nuclei/drivers \
+-I$(FIRMWARE_DIR) \
+#-I$(FIRMWARE_DIR)/usbfs_driver/include \
 
 # compile gcc flags
 ASFLAGS := $(CFLAGS) $(ARCH) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wl,-Bstatic
@@ -99,7 +104,7 @@ CFLAGS += -std=gnu11 -MMD -MP #.deps/$(notdir $(<:.c=.d)) -MF$(@:%.o=%.d) -MT$(@
 # LDFLAGS
 #######################################
 # link script
-LDSCRIPT = $(FIRMWARE_DIR)/riscv/linker/GD32VF103x8.lds
+LDSCRIPT = $(FIRMWARE_DIR)/longan_nano_flashxip.lds
 
 # libraries
 #LIBS = -lc_nano -lm

@@ -36,10 +36,6 @@ OF SUCH DAMAGE.
 #ifndef GD32VF103C_LONGAN_NANO_H
 #define GD32VF103C_LONGAN_NANO_H
 
-#ifndef DEBUG_USART_BAUDRATE
-#define DEBUG_USART_BAUDRATE 115200U
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif

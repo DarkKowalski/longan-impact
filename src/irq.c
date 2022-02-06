@@ -1,4 +1,3 @@
-//See LICENSE for license details.
 #include <stdint.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -12,7 +11,6 @@ __attribute__((weak)) uintptr_t handle_nmi()
   return 0;
 }
 
-
 __attribute__((weak)) uintptr_t handle_trap(uintptr_t mcause, uintptr_t sp)
 {
   if(mcause == 0xFFF) {
@@ -25,8 +23,3 @@ __attribute__((weak)) uintptr_t handle_trap(uintptr_t mcause, uintptr_t sp)
   _exit(mcause);
   return 0;
 }
-
-
-
-
-
